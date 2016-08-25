@@ -1,9 +1,27 @@
-master:
-  build: .
-  environment:
-    JAVA_OPTS: "-Djava.awt.headless=true"
-  ports:
-    - "50000:50000"
-    - "8080:8080"
-  volumes:
-    - /var/jenkins_home
+version: '2'
+services:
+  postgres:
+    container_name: dorajistyle-postgres
+    image: postgres
+    # image: kpettijohn/postgis - when you use postgis
+    ports:
+      - "5432:5432"
+  redis:
+    container_name: dorajistyle-redis
+    image: redis
+    ports: 
+      - "6379:6379"
+  master:
+    build: .
+    container_name: jenkins
+    restart: always
+    environment:
+      JAVA_OPTS: "-Djava.awt.headless=true"
+    ports:
+      - "50000:50000"
+      - "8080:8080"
+    volumes:
+      - /var/jenkins_home
+    depends_on:
+      - postgres
+      - redis

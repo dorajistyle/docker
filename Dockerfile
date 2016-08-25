@@ -1,6 +1,29 @@
 FROM openjdk:8-jdk
 
-RUN apt-get update && apt-get install -y git curl zip && rm -rf /var/lib/apt/lists/*
+RUN echo "deb http://ftp.kr.debian.org/debian/ jessie main contrib non-free" >> /etc/apt/sources.list && echo "deb-src http://ftp.kr.debian.org/debian/ jessie main contrib non-free" >> /etc/apt/sources.list && rm -rf /var/lib/apt/lists/* && apt-get update && apt-get --no-install-recommends -qq -y --force-yes install \
+# Below packages for rbenv(ruby) 
+autoconf \
+bison \
+build-essential \
+libssl-dev \
+libyaml-dev \
+libreadline6-dev \
+zlib1g-dev \
+libncurses5-dev \
+libffi-dev \
+libgdbm3 \
+libgdbm-dev \
+graphviz \
+imagemagick \
+libmagickwand-dev \
+nodejs \
+# libpq-dev for postgres
+libpq-dev \
+git \
+curl \
+zip \
+python-pip \
+&& rm -rf /var/lib/apt/lists/*
 
 ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT 50000
@@ -69,3 +92,64 @@ ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/jenkins.sh"]
 # from a derived Dockerfile, can use `RUN plugins.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
 COPY plugins.sh /usr/local/bin/plugins.sh
 COPY install-plugins.sh /usr/local/bin/install-plugins.sh
+RUN /usr/local/bin/install-plugins.sh workflow-api \
+branch-api \
+scm-api \
+workflow-cps-global-lib \
+rake \
+timestamper \
+ssh-slaves \
+token-macro \
+github-api \
+pam-auth \
+script-security \
+mailer \
+email-ext \
+ruby-runtime \
+matrix-auth \
+pipeline-stage-view \
+ldap \
+plain-credentials \
+ace-editor \
+workflow-step-api \
+matrix-project \
+pipeline-input-step \
+workflow-support \
+workflow-cps \
+structs \
+github \
+junit \
+antisamy-markup-formatter \
+pipeline-rest-api \
+mapdb-api \
+rubyMetrics \
+workflow-aggregator \
+ssh-credentials \
+ant \
+credentials-binding \
+workflow-multibranch \
+subversion \
+github-branch-source \
+git \
+workflow-job \
+handlebars \
+jquery-detached \
+workflow-basic-steps \
+pipeline-build-step \
+icon-shim \
+durable-task \
+github-organization-folder \
+external-monitor-job \
+build-timeout \
+git-client \
+pipeline-stage-step \
+cloudbees-folder \
+workflow-scm-step \
+credentials \
+ws-cleanup \
+gradle \
+momentjs \
+git-server \
+windows-slaves \
+rbenv \
+workflow-durable-task-step
