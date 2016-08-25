@@ -6,28 +6,28 @@ It's a modified version of [Official Jenkins Docker image](https://github.com/je
 
 # Usage
 
-Clone this project and run command below.
+1. Clone this project and run command below.
 
 ```
 docker-compose up
 ```
 
-Copy admin password from terminal then put it into executed jenkins container.
+2. Copy admin password from terminal then put it into executed jenkins container.
 
-Fill user info likes id,password,email etc.
+3. Fill user info likes id,password,email etc.
 
-Create a Multi-configuration project.
+4. Create a Multi-configuration project.
 
-Choose git from `Source Code Management` section.
+5. Choose git from `Source Code Management` section.
 
-Copy [https://github.com/dorajistyle/rails-postgres-sample-for-jenkins](https://github.com/dorajistyle/rails-postgres-sample-for-jenkins) and put into Repository URL field.
+6. Copy [https://github.com/dorajistyle/rails-postgres-sample-for-jenkins](https://github.com/dorajistyle/rails-postgres-sample-for-jenkins) and put into Repository URL field.
 
-Check rbenv build wrapper from 'Build Environment'.  
+7. Check rbenv build wrapper from 'Build Environment'.  
 Put `2.3.1` into The Ruby version field.  
 Put `bundler,rake,execjs` into Preinstall gem list.
 
-Chose Execute shell from the select box called Add build step.  
+8. Chose Execute shell from the select box called Add build step.  
 Put `bash jenkins-test.sh` into Command field.
 
-Save configuration and run build with `Build Now` button in left side menu of the project.
+9. Save configuration and run build with `Build Now` button in left side menu of the project.
 
